@@ -20,11 +20,6 @@ After installation please follow the instructions below to download the repo.
 
 - Within the terminal window, create a folder in your local drive.
 - Navigate to the folder created.
-- Run the following command:
-
-```bash
-  git clone https://github.com/adrianhuber17/webSocket-App.git
-```
 
 - Navigate into the new sub-folder created called **WebSocket-App**.
 - Run the following commands to create an environment and install the dependencies:
