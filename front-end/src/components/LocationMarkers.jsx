@@ -17,7 +17,7 @@ function LocationMarkers() {
     dblclick(ev) {
       const { lat, lng } = ev.latlng;
       const newLocations = [...locations];
-      newLocations.push({ latlng: [lat, lng], name: "", caseStatus: "" });
+      newLocations.push({ latlng: [lat, lng]});
       setLocations(newLocations);
     }
   });

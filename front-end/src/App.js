@@ -51,7 +51,7 @@ function App() {
   return (
     
     <div className="App">
-      <MapContainer center={[52.22635, 20.944347]} zoom={17} scrollWheelZoom={true}>
+      <MapContainer center={[52.22635, 20.944347]} zoom={17} scrollWheelZoom={true} doubleClickZoom={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
