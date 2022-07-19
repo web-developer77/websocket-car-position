@@ -5,6 +5,8 @@ import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
+import LocationMarkers from "./components/LocationMarkers";
+
 function App() {
   const [socketInstance, setSocketInstance] = useState("");
   const [loading, setLoading] = useState(true);
@@ -44,19 +46,27 @@ function App() {
       };
     }
   }, [buttonStatus]);
+  
 
   return (
+    
     <div className="App">
-      <MapContainer center={[51.505, -0.09]} zoom={17} scrollWheelZoom={true}>
+      <MapContainer center={[52.22635, 20.944347]} zoom={17} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[51.505, -0.09]}>
+        {/* <Marker position={[52.22635, 20.944347]} icon={pausedIcon}>
           <Popup>
-            This is current car's position (51.505, -0.09).
+            This is stopped car <br /> Car's Number is 1030
           </Popup>
         </Marker>
+        <Marker position={[52.228798, 20.972265]} icon={movingIcon}>
+          <Popup>
+            This is moving car <br /> Car's Number is 1031
+          </Popup>
+        </Marker> */}
+        <LocationMarkers />
       </MapContainer>
       <h1>React/Flask App + socket.io</h1>
       <div className="line">

@@ -49,18 +49,18 @@ def disconnected():
 # def on_subscribe(client, userdata, mid, granted_qos, properties=None):
 #     print("Subscribed: ")
 
-# # print message, useful for checking if it was successful
-# def on_message(client, userdata, msg):
-#     conn = sqlite3.connect('D:/03_projects/websocket-car-position/db/projectDatabase.db')
-#     c = conn.cursor()
+# print message, useful for checking if it was successful
+def on_message(client, userdata, msg):
+    conn = sqlite3.connect('D:/03_projects/websocket-car-position/db/projectDatabase.db')
+    c = conn.cursor()
 
-#     my_json = msg.payload.decode('utf8').replace("'", '"')
-#     data = json.loads(my_json)
-#     print(data)
+    my_json = msg.payload.decode('utf8').replace("'", '"')
+    data = json.loads(my_json)
+    print(data)
     
-#     c.execute("INSERT INTO mqttData VALUES(?,?,?,?,?,?,?,?,?,?)",(None,data["lon"],data["lat"],None,data["azimuth"],data["time"],data["devId"],data["satelitesError"],data["satelites"],data["softVersion"]))
-#     conn.commit()
-#     conn.close()
+    c.execute("INSERT INTO mqttData VALUES(?,?,?,?,?,?,?,?,?,?)",(None,data["lon"],data["lat"],None,data["azimuth"],data["time"],data["devId"],data["satelitesError"],data["satelites"],data["softVersion"]))
+    conn.commit()
+    conn.close()
     
 # # using MQTT version 5 here, for 3.1.1: MQTTv311, 3.1: MQTTv31
 # # userdata is user defined data of any type, updated by user_data_set()
