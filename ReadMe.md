@@ -59,10 +59,7 @@ Terminal **window 2** - start the client:
 
 ## Demo
 
-The browser on the left is Google Chrome and the Browser on the right is Firefox.
-The demo below displays in **red** a simple fetch to the server that executes on the rendering of the page using an http call.
-It also displays a chat communication between two users in the server using WebSocket communication. Notice that when a message is sent by one
-user, the other user receives the message without having to re-render the component or the page.
+The browser will be displayed the car's current position
 
 ![](/map.jpg)
 
