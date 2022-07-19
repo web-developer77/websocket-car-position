@@ -3,7 +3,7 @@ import HttpCall from "./components/HttpCall";
 import WebSocketCall from "./components/WebSocketCall";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 function App() {
   const [socketInstance, setSocketInstance] = useState("");
@@ -47,7 +47,7 @@ function App() {
 
   return (
     <div className="App">
-      <MapContainer center={[51.505, -0.09]} zoom={20} scrollWheelZoom={true}>
+      <MapContainer center={[51.505, -0.09]} zoom={17} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
