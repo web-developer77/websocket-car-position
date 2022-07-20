@@ -18,6 +18,18 @@ def http_call():
     data = {'data':'This text was fetched using an HTTP call to server on render'}
     return jsonify(data)
 
+@app.route("/get-position")
+def get_position():
+    conn = sqlite3.connect('db/projectDatabase.db')
+
+    cur = conn.cursor()
+    data = cur.execute("select * from mqttData")
+
+    rows = cur.fetchall()
+    conn.commit()
+    
+    return jsonify(rows)
+
 @socketio.on("connect")
 def connected():
     """event listener when client connects to the server"""
@@ -49,22 +61,22 @@ def disconnected():
 # def on_subscribe(client, userdata, mid, granted_qos, properties=None):
 #     print("Subscribed: ")
 
-# print message, useful for checking if it was successful
-def on_message(client, userdata, msg):
-    conn = sqlite3.connect('D:/03_projects/websocket-car-position/db/projectDatabase.db')
-    c = conn.cursor()
+# # print message, useful for checking if it was successful
+# def on_message(client, userdata, msg):
+#     conn = sqlite3.connect('D:/03_projects/websocket-car-position/db/projectDatabase.db')
+#     c = conn.cursor()
 
-    my_json = msg.payload.decode('utf8').replace("'", '"')
-    data = json.loads(my_json)
-    print(data)
+#     my_json = msg.payload.decode('utf8').replace("'", '"')
+#     data = json.loads(my_json)
+#     print(data)
     
-    c.execute("INSERT INTO mqttData VALUES(?,?,?,?,?,?,?,?,?,?)",(None,data["lon"],data["lat"],None,data["azimuth"],data["time"],data["devId"],data["satelitesError"],data["satelites"],data["softVersion"]))
-    conn.commit()
-    conn.close()
+#     c.execute("INSERT INTO mqttData VALUES(?,?,?,?,?,?,?,?,?,?)",(None,data["lon"],data["lat"],None,data["azimuth"],data["time"],data["devId"],data["satelitesError"],data["satelites"],data["softVersion"]))
+#     conn.commit()
+#     conn.close()
     
-# # using MQTT version 5 here, for 3.1.1: MQTTv311, 3.1: MQTTv31
-# # userdata is user defined data of any type, updated by user_data_set()
-# # client_id is the given name of the client
+# using MQTT version 5 here, for 3.1.1: MQTTv311, 3.1: MQTTv31
+# userdata is user defined data of any type, updated by user_data_set()
+# client_id is the given name of the client
 # client = paho.Client(client_id="", userdata=None, protocol=paho.MQTTv5)
 # client.on_connect = on_connect
 
@@ -78,10 +90,11 @@ def on_message(client, userdata, msg):
 # # setting callbacks, use separate functions like above for better visibility
 # client.on_subscribe = on_subscribe
 # client.on_message = on_message
-# #client.on_publish = on_publish
+# client.on_publish = on_publish
 
 # # subscribe to topic
 # client.subscribe("/sx/")
+# client.loop_forever()
 
 if __name__ == '__main__':
     socketio.run(app, debug=True,port=5001)
